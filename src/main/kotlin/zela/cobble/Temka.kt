@@ -51,7 +51,7 @@ val app: HttpHandler = routes(
     "/templates/pebble" bind GET to {
         val renderer = PebbleTemplates().CachingClasspath()
         val view = Body.viewModel(renderer, TEXT_HTML).toLens()
-        val viewModel = PebbleViewModel("Hello there!")
+        val viewModel = PebbleViewModel()
         Response(OK).with(view of viewModel)
     },
 
@@ -62,6 +62,13 @@ val app: HttpHandler = routes(
     "/jsonrpc" bind POST to JsonRpc.auto(Jackson, JsonRpcCounterErrorHandler) {
         method("increment", handler(counter::increment))
         method("current", handler(counter::currentValue))
+    },
+
+    "/main" bind GET to {
+        val renderer = PebbleTemplates().CachingClasspath()
+        val view = Body.viewModel(renderer, TEXT_HTML).toLens()
+        val viewModel = PebbleViewModel()
+        Response(OK).with(view of viewModel)
     }
 )
 
