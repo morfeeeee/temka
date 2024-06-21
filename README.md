@@ -1,0 +1,7 @@
+# Temka
+
+## Package
+```
+./gradlew distZip
+```
+
