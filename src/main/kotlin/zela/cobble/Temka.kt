@@ -72,7 +72,6 @@ fun main() {
     val renderer = ContextAwarePebbleTemplates().HotReload("src/main/resources")
     val htmlView = ContextAwareViewRender.withContentType(renderer, ContentType.TEXT_HTML)
     val appWithStaticResources = routes(
-        static(ResourceLoader.Classpath("/zela/cobble/public")),
         router(htmlView),
     )
 
