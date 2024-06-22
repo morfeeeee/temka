@@ -1,5 +1,6 @@
 package zela.cobble
 
+import org.http4k.core.*
 import zela.cobble.formats.JacksonMessage
 import zela.cobble.formats.imageFile
 import zela.cobble.formats.jacksonMessageLens
@@ -8,24 +9,24 @@ import zela.cobble.formats.strictFormBody
 import zela.cobble.models.PebbleViewModel
 import zela.cobble.rpc.JsonRpcCounter
 import zela.cobble.rpc.JsonRpcCounterErrorHandler
-import org.http4k.core.Body
 import org.http4k.core.ContentType.Companion.TEXT_HTML
-import org.http4k.core.HttpHandler
 import org.http4k.core.Method.GET
 import org.http4k.core.Method.POST
-import org.http4k.core.Response
 import org.http4k.core.Status.Companion.OK
-import org.http4k.core.then
-import org.http4k.core.with
 import org.http4k.filter.DebuggingFilters.PrintRequest
+import org.http4k.filter.ServerFilters
 import org.http4k.format.Jackson
 import org.http4k.jsonrpc.JsonRpc
+import org.http4k.routing.ResourceLoader
 import org.http4k.routing.bind
 import org.http4k.routing.routes
+import org.http4k.routing.static
 import org.http4k.server.Netty
 import org.http4k.server.asServer
 import org.http4k.template.PebbleTemplates
 import org.http4k.template.viewModel
+import zela.cobble.templates.ContextAwarePebbleTemplates
+import zela.cobble.templates.ContextAwareViewRender
 
 val counter = JsonRpcCounter()
 val app: HttpHandler = routes(
@@ -73,9 +74,15 @@ val app: HttpHandler = routes(
 )
 
 fun main() {
-    val printingApp: HttpHandler = PrintRequest().then(app)
 
-    val server = printingApp.asServer(Netty(9000)).start()
+    val contexts = RequestContexts()
+    val renderer = ContextAwarePebbleTemplates().HotReload("src/main/resources")
+    val htmlView = ContextAwareViewRender.withContentType(renderer, ContentType.TEXT_HTML)
+    val appWithStaticResources = routes(
+        router(htmlView),
+    )
 
-    println("Server started on " + server.port())
+    val server =  appWithStaticResources.asServer(Netty(9000)).start()
+
+    println("Server started on http://localhost:" + server.port())
 }
