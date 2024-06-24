@@ -1,0 +1,54 @@
+    {% extends "./partials/Layout.peb" %}
+
+    {% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1>Вход в систему</h1>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="login" class="form-label">Введите логин</label>
+                            <input name="login" type="text" class="form-control" id="login" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите логин.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Введите пароль</label>
+                            <input name="password" type="password" class="form-control" id="password" minlength="3" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите пароль (минимум 3 символа).
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}

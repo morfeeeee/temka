@@ -69,5 +69,8 @@ dependencies {
     testImplementation("org.http4k:http4k-testing-kotest:${http4kVersion}")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+    implementation("com.auth0:java-jwt:4.2.1")
+    implementation("com.fasterxml.jackson.module:jackson-modules-java8:2.14.1")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1")
 }
 

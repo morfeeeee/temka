@@ -1,3 +1,5 @@
+    {% extends "./partials/Layout.peb" %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,6 +9,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    {% block content %}
 
 <!-- Навигационная панель -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -144,3 +147,5 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>
+{% endblock %}
+
