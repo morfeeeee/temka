@@ -26,6 +26,7 @@ fun router(cashType: ContextAwareViewRender, userRegistr: UserRegistrationOperat
 //        "/users/{username}/edit" bind Method.GET to UserGetEditandler(cashType,userStorage),
         "/users/add" bind Method.POST to UserAddHandler(cashType,userRegistr),
         "/users/add" bind Method.GET to UserGetAddHandler(cashType),
-
+        "/services" bind Method.GET to ServicesHandler(cashType),
+        "/contacts" bind Method.GET to ContactsHandler(cashType),
     )
 }
