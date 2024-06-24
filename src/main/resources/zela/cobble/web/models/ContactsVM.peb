@@ -1,0 +1,93 @@
+    {% extends "./partilas/Layout.peb" %}
+    {% block content %}
+    <style>
+        .service-box {
+            transition: transform 0.3s;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            color: #343a40;
+        }
+        .service-box:hover {
+            transform: translateY(-10px);
+            background-color: #e9ecef;
+        }
+        .service-btn {
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .bg-dark-blue {
+            background-color: #343a40;
+            color: white;
+        }
+        .bg-primary-light {
+            background-color: #e2e6ea;
+            color: #343a40;
+        }
+    </style>
+<!-- Контакты -->
+<section id="contact" class="bg-dark-blue py-5">
+    <div class="container">
+        <h2 class="text-center text-white">Свяжитесь с нами</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h4>Наш адрес</h4>
+                <p>г. Ярославль, ул. Союзная 144</p>
+                <p>Телефон: +7 960-535-37-71</p>
+                <p>Email: znen21426@gmail.com</p>
+                <p><a href="https://vk.com/club225874144" class="btn btn-outline-light">Наша группа ВКонтакте</a></p>
+            </div>
+            <div class="col-md-6">
+                <h4>Напишите нам</h4>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" id="name" placeholder="Ваше имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Ваш Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea class="form-control" id="message" rows="3" placeholder="Ваше сообщение"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Отзывы -->
+<section id="reviews" class="bg-primary-light py-5">
+    <div class="container">
+        <h2 class="text-center">Отзывы</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service-box mb-4">
+                    <p><strong>Иван Иванов</strong></p>
+                    <p>"Отличный сервис! Очень доволен результатом."</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-box mb-4">
+                    <p><strong>Анна Смирнова</strong></p>
+                    <p>"Профессиональный подход и качественная работа."</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-box mb-4">
+                    <p><strong>Сергей Петров</strong></p>
+                    <p>"Рекомендую всем! Быстро и качественно."</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-primary">Оставить отзыв</a>
+        </div>
+    </div>
+</section>
+    {% endblock %}
+
