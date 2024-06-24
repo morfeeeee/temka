@@ -8,6 +8,7 @@ import org.http4k.routing.RoutingHttpHandler
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import zela.cobble.templates.ContextAwareViewRender
+import zela.cobble.web.handlers.ContactsHandler
 import zela.cobble.web.handlers.HomeHandler
 import zela.cobble.web.handlers.ServicesHandler
 
@@ -16,6 +17,7 @@ fun router(cashType: ContextAwareViewRender): RoutingHttpHandler{
     return routes(
         "/" bind Method.GET to HomeHandler(cashType),
         "/services" bind Method.GET to ServicesHandler(cashType),
+        "/contacts" bind Method.GET to ContactsHandler(cashType),
 //        "/logout" bind Method.GET to LogoutHandler(),
 //        "/login" bind Method.POST to LoginHandler(cashType,userPasswordChecker),
 //        "/login" bind Method.GET to LoginGetHandler(cashType),
