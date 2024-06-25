@@ -45,6 +45,9 @@ import org.http4k.lens.RequestContextKey
 import zela.cobble.config.readConfiguration
 import zela.cobble.operations.JwtTools
 import zela.cobble.web.filters.AuthFilter
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.Statement
 
 val counter = JsonRpcCounter()
 val app: HttpHandler = routes(
@@ -134,7 +137,6 @@ fun main() {
 
     val authFilter = AuthFilter(jwtTools, userLens, cookieLens,userStorage)
 
-
     val appWithStaticResources = routes(
         static(ResourceLoader.Classpath("/zela/cobble/public")),
         router(htmlView, userRegistration,userPasswordChecker),
@@ -143,4 +145,12 @@ fun main() {
     val server =  ServerFilters.InitialiseRequestContext(contexts).then(authFilter).then(appWithStaticResources).asServer(Netty(9000)).start()
 
     println("Server started on http://localhost:" + server.port())
-}
+
+    val url = "jdbc:mysql://localhost:3306/data"
+    val connect = DriverManager.getConnection(url, "root", "!admin")
+
+    println("you are connected")
+    val statement = connect.createStatement()
+    statement.executeUpdate("CREATE TABLE Users (id MEDIUMINT NOT NULL AUTO_INCREMENT, name CHAR(30) NOT NULL, PRIMARY KEY (id))")
+    statement.executeUpdate("insert into Users (name) values('serega')")
+    }
