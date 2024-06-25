@@ -1,52 +1,57 @@
     {% extends "./partilas/Layout.peb" %}
     {% block content %}
 <style>
-        .hero {
-            background: url('https://via.placeholder.com/1500x600') no-repeat center center;
-            background-size: cover;
-            color: white;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: bold;
-        }
-        .hero p {
-            font-size: 1.5rem;
-        }
-        .hero .btn {
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-        }
-        .service-box {
-            transition: transform 0.3s;
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            color: #343a40;
-        }
-        .service-box:hover {
-            transform: translateY(-10px);
-            background-color: #e9ecef;
-        }
-        .service-btn {
-            padding: 1rem;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        .bg-dark-blue {
-            background-color: #343a40;
-            color: white;
-        }
-        .bg-primary-light {
-            background-color: #e2e6ea;
-            color: #343a40;
-        }
-    </style>
+    .hero {
+        background: url('https://via.placeholder.com/1500x600') no-repeat center center;
+        background-size: cover;
+        color: white;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 4rem;
+        font-weight: bold;
+    }
+    .hero p {
+        font-size: 1.5rem;
+    }
+    .hero .btn {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+    }
+    .service-box {
+        transition: transform 0.3s;
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        color: #343a40;
+    }
+    .service-box:hover {
+        transform: translateY(-10px);
+        background-color: #e9ecef;
+    }
+    .service-btn {
+        padding: 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    .bg-dark-blue {
+        background-color: #343a40;
+        color: white;
+    }
+    .bg-primary-light {
+        background-color: #e2e6ea;
+        color: #343a40;
+    }
+    .details {
+        display: none;
+        margin-top: 1rem;
+    }
+</style>
+
 <!-- Услуги -->
 <section id="services" class="bg-dark-blue py-5">
     <div class="container">
@@ -57,7 +62,10 @@
                     <i class="fas fa-laptop-code fa-3x mb-3"></i>
                     <h4>Создание сайтов</h4>
                     <p>Полный цикл разработки сайтов под ключ от идеи до запуска.</p>
-                    <a href="#" class="btn btn-outline-primary service-btn">Подробнее</a>
+                    <a href="#" class="btn btn-outline-primary service-btn" onclick="toggleDetails('details1')">Подробнее</a>
+                    <div id="details1" class="details">
+                        <p>Мы разрабатываем сайты любой сложности и масштаба. Наши специалисты используют современные технологии и подходы для создания эффективных и безопасных веб-решений.</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -65,7 +73,10 @@
                     <i class="fas fa-bullhorn fa-3x mb-3"></i>
                     <h4>Разработка лендингов</h4>
                     <p>Эффективные лендинги для ваших маркетинговых кампаний.</p>
-                    <a href="#" class="btn btn-outline-primary service-btn">Подробнее</a>
+                    <a href="#" class="btn btn-outline-primary service-btn" onclick="toggleDetails('details2')">Подробнее</a>
+                    <div id="details2" class="details">
+                        <p>Мы создаем лендинги, которые действительно работают. Наши лендинги помогают привлекать новых клиентов и увеличивать конверсию за счет продуманного дизайна и функциональности.</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -73,7 +84,10 @@
                     <i class="fas fa-shopping-cart fa-3x mb-3"></i>
                     <h4>Интернет-магазины</h4>
                     <p>Создание удобных и функциональных интернет-магазинов.</p>
-                    <a href="#" class="btn btn-outline-primary service-btn">Подробнее</a>
+                    <a href="#" class="btn btn-outline-primary service-btn" onclick="toggleDetails('details3')">Подробнее</a>
+                    <div id="details3" class="details">
+                        <p>Мы создаем интернет-магазины, которые помогут вашему бизнесу расти. Удобные, безопасные и настраиваемые решения для электронной коммерции.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,6 +121,15 @@
     </div>
 </section>
 
+<script>
+    function toggleDetails(id) {
+        var element = document.getElementById(id);
+        if (element.style.display === "none" || element.style.display === "") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+</script>
 
-    {% endblock %}
-
+{% endblock %}

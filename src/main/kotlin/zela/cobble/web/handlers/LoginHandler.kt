@@ -14,6 +14,7 @@ import zela.cobble.config.readConfiguration
 import zela.cobble.operations.JwtTools
 import zela.cobble.operations.PasswordCheckerOperation
 import zela.cobble.templates.ContextAwareViewRender
+import zela.cobble.web.models.ErrorLoginFormVM
 
 
 class LoginHandler(val renderer: ContextAwareViewRender, val userPasswordChecker: PasswordCheckerOperation) : HttpHandler {
@@ -38,10 +39,10 @@ class LoginHandler(val renderer: ContextAwareViewRender, val userPasswordChecker
             tokenExpiry = jwtConfig.tokenValidity
         )
 
-//        if (!userPasswordChecker.checkPassword(nameLog!!, password!!)) {
-//            return Response(Status.OK).with(renderer(request) of ErrorLoginFormVM(nameLog, password,"Ошибка: Неправильное имя пользователя или пароль."))
-//
-//        }
+        if (!userPasswordChecker.checkPassword(nameLog!!, password!!)) {
+            return Response(Status.OK).with(renderer(request) of ErrorLoginFormVM(nameLog, password,"Ошибка: Неправильное имя пользователя или пароль."))
+
+        }
 
 
 

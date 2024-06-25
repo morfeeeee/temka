@@ -6,6 +6,7 @@
     <title>{% block title %}{% endblock %}
     </title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -29,21 +30,27 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contacts">Контакты и отзывы</a>
             </li>
-
-            <li class="nav-item">
-            <div class="navbar-brand ml-auto">
-          {% if user is empty %}
-            <a href="/login" class="btn btn-primary">Вход</a>
-            <a href="/users/add" class="btn btn-primary">Регистрация</a>
-          {% else %}
-            <span class="text-muted">{{ user.nameLog }}</span> | <a href="/logout" class="btn btn-danger">Выход</a>
-          {% endif %}
-          </li>
+            {% if user is empty %}
+                <li class="nav-item">
+                    <a class="nav-link btn btn-link" href="/login">Вход</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-link" href="/users/add">Регистрация</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">
+                        <i class="fas fa-user"></i> {{ user.nameLog }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-link text-danger" href="/logout">Выход</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>
 {% block content %}
-
 {% endblock %}
 
 <!-- Подвал -->
