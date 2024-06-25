@@ -23,7 +23,7 @@ class UserAddHandler(val renderer: ContextAwareViewRender, private val registr: 
         var nameLog = form.findSingle("login")
         var password = form.findSingle("password")
         var confirmPassword = form.findSingle("password1")
-        val role = form.findSingle("role")
+//        val role = form.findSingle("role")
         if (nameLog != null) {
             nameLog = nameLog.trim()
         }
@@ -42,7 +42,7 @@ class UserAddHandler(val renderer: ContextAwareViewRender, private val registr: 
 //            return Response(Status.OK).with(renderer(request) of ErrorUserFormVM(nameLog!!, password!!, confirmPassword!!, errors.getAllErrors()))
 //        }
 
-        registr.registerUser(nameLog!!,password!!,currentDateTime,role!!)
+        registr.registerUser(nameLog!!,password!!,currentDateTime,"citizen")
 
 
 
