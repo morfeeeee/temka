@@ -100,10 +100,43 @@ fun main() {
     val mapSalt = mutableMapOf<String, String>()
 //            MutableMap<String, String> = objectMapper.readValue(File("Salt.json").readText())
 
+    val url = "jdbc:mysql://localhost:3306/database"
+    val connect = DriverManager.getConnection(url, "root", "Nagano106")
+    //    val hook = thread(start = false) {
+    val query = "SELECT nameLog, date, password, role FROM Users"
+    connect.createStatement().use { stmt ->
+        val resultSet = stmt.executeQuery(query)
+        while (resultSet.next()) {
+            val name = resultSet.getString("nameLog")
+            val date = resultSet.getTimestamp("date").toLocalDateTime()
+            val password = resultSet.getString("password")
+            val role = resultSet.getString("role")
+            val user = User(name,password,date,role)
+            listUsers.add(user)
+
+        }
+    }
+//    }
+
+    val querySalt = "SELECT username, salt FROM Salts"
+    connect.createStatement().use { stmt ->
+        val resultSet = stmt.executeQuery(querySalt)
+        while (resultSet.next()) {
+            val name = resultSet.getString("username")
+            val salt = resultSet.getString("salt")
+            mapSalt[name] = salt
+
+        }
+    }
+
+    for(i in listUsers){
+        println("Login: ${i.nameLog}  Password: ${i.password}  Role: ${i.role}  Date: ${i.date}" )
+    }
+
     val saltGenerator = SaltGenerator()
     val saltStorage = SaltStorage(mapSalt)
     val userStorage = UserStorage(listUsers)
-    val userRegistration = UserRegistrationOperation(userStorage, saltStorage, saltGenerator)
+    val userRegistration = UserRegistrationOperation(userStorage, saltStorage, saltGenerator,connect)
     val userPasswordChecker = PasswordCheckerOperation(userStorage, saltStorage)
     val config = readConfiguration()
     val jwtConfig = config.jwtConfig
@@ -122,47 +155,46 @@ fun main() {
 
     val authFilter = AuthFilter(jwtTools, userLens, cookieLens,userStorage)
 
-    val url = "jdbc:mysql://localhost:3306/database"
-    val connect = DriverManager.getConnection(url, "root", "Nagano106")
+
 
     val appWithStaticResources = routes(
         static(ResourceLoader.Classpath("/zela/cobble/public")),
-        router(htmlView, userRegistration,userPasswordChecker, connect),
+        router(htmlView, userRegistration,userPasswordChecker,),
     )
 
     val server =  ServerFilters.InitialiseRequestContext(contexts).then(authFilter).then(appWithStaticResources).asServer(Netty(9000)).start()
     println("Server started on http://localhost:" + server.port())
 
 
-//    val dropTableQuery = "DROP TABLE IF EXISTS Users"
+//    val dropTableQuery = "DROP TABLE IF EXISTS Salts"
+//    val drop = "DROP TABLE IF EXISTS Users"
 //    val createTableQuery = """
 //        CREATE TABLE Users (
 //            id MEDIUMINT NOT NULL AUTO_INCREMENT,
 //            nameLog CHAR(30) NOT NULL,
-//            password CHAR(60) NOT NULL,
+//            password CHAR(150) NOT NULL,
 //            date DATETIME NOT NULL,
 //            role CHAR(30) NOT NULL,
 //            PRIMARY KEY (id)
 //        )
 //    """
-//
+//    val createTableQuery1 = """
+//        CREATE TABLE Salts (
+//            id MEDIUMINT NOT NULL AUTO_INCREMENT,
+//            username CHAR(30) NOT NULL,
+//            salt CHAR(150) NOT NULL,
+//            PRIMARY KEY (id)
+//        )
+//    """
 //    connect.createStatement().use { stmt ->
 //        stmt.executeUpdate(dropTableQuery)
 //        stmt.executeUpdate(createTableQuery)
+//        stmt.executeUpdate(createTableQuery1)
+//        stmt.executeUpdate(drop)
 //    }
 
     println("you are connected")
-//    val hook = thread(start = false) {
-        val query = "SELECT nameLog, date FROM Users"
-        connect.createStatement().use { stmt ->
-            val resultSet = stmt.executeQuery(query)
-            while (resultSet.next()) {
-                val name = resultSet.getString("nameLog")
-                val date = resultSet.getTimestamp("date").toLocalDateTime()
-                println("Name: $name, Date: $date")
-            }
-        }
-//    }
+
 
     Runtime.getRuntime().addShutdownHook(Thread {
 //        hook.start()

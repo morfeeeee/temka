@@ -11,12 +11,14 @@ import org.http4k.core.Status
 import org.http4k.core.body.form
 import org.http4k.core.findSingle
 import org.http4k.core.with
+import zela.cobble.errors.UserFormErrors
+import zela.cobble.web.models.ErrorUserFormVM
 import java.sql.Connection
 
 import java.time.LocalDateTime
 
 
-class UserAddHandler(val renderer: ContextAwareViewRender, private val registr: UserRegistrationOperation,private val connection: Connection) : HttpHandler {
+class UserAddHandler(val renderer: ContextAwareViewRender, private val registr: UserRegistrationOperation,) : HttpHandler {
     override fun invoke(request: Request): Response {
 
 
@@ -37,24 +39,14 @@ class UserAddHandler(val renderer: ContextAwareViewRender, private val registr: 
         val currentDateTime = LocalDateTime.now()
 
 
-//        val formErrors = UserFormErrors(nameLog,password,confirmPassword, registr.userStorage)
-//        val errors = formErrors.getFormErrors()
-//        if(errors.isError()){
-//            return Response(Status.OK).with(renderer(request) of ErrorUserFormVM(nameLog!!, password!!, confirmPassword!!, errors.getAllErrors()))
-//        }
+        val formErrors = UserFormErrors(nameLog,password,confirmPassword, registr.userStorage)
+        val errors = formErrors.getFormErrors()
+        if(errors.isError()){
+            return Response(Status.OK).with(renderer(request) of ErrorUserFormVM(nameLog!!, password!!, confirmPassword!!, errors.getAllErrors()))
+        }
         if (nameLog != null && password != null && password == confirmPassword) {
             registr.registerUser(nameLog, password, currentDateTime, "citizen")
-            val insertQuery = """
-                INSERT INTO Users (nameLog, password, date, role) 
-                VALUES (?, ?, ?, ?)
-            """
-            connection.prepareStatement(insertQuery).use { stmt ->
-                stmt.setString(1, nameLog)
-                stmt.setString(2, password)
-                stmt.setTimestamp(3, java.sql.Timestamp.valueOf(currentDateTime))
-                stmt.setString(4, "citizen")
-                stmt.executeUpdate()
-            }
+
             return Response(Status.FOUND).header("Location", "/")
         } else {
             return Response(Status.BAD_REQUEST).body("Invalid registration details")
