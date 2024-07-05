@@ -58,6 +58,7 @@ dependencies {
     implementation("org.http4k:http4k-connect-storage-jdbc:${http4kConnectVersion}")
     implementation("org.http4k:http4k-core:${http4kVersion}")
     implementation("org.http4k:http4k-format-jackson:${http4kVersion}")
+    implementation("mysql:mysql-connector-java:8.0.26") // проверьте последнюю версию
     implementation("org.http4k:http4k-jsonrpc:${http4kVersion}")
     implementation("org.http4k:http4k-multipart:${http4kVersion}")
     implementation("org.http4k:http4k-server-netty:${http4kVersion}")
