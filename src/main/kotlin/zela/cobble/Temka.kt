@@ -45,6 +45,8 @@ import org.http4k.lens.RequestContextKey
 import zela.cobble.config.readConfiguration
 import zela.cobble.operations.JwtTools
 import zela.cobble.web.filters.AuthFilter
+import java.sql.DriverManager
+import kotlin.concurrent.thread
 
 val counter = JsonRpcCounter()
 val app: HttpHandler = routes(
@@ -92,21 +94,7 @@ val app: HttpHandler = routes(
 )
 
 fun main() {
-    val objectMapper = jacksonObjectMapper()
-    objectMapper.enable(SerializationFeature.INDENT_OUTPUT)
-    objectMapper.registerModule(JavaTimeModule())
-    objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-    if (!File("Users.json").exists()) {
-        File("Salt.json").createNewFile()
-        File("Users.json").createNewFile()
-        val users = mutableListOf<User>()
-        val salt =  mutableMapOf<String, String>()
-        val userString = objectMapper.writeValueAsString(users)
-        val saltString = objectMapper.writeValueAsString(salt)
-        File("Users.json").writeText(userString, Charsets.UTF_8)
-        File("Salt.json").writeText(saltString, Charsets.UTF_8)
 
-    }
     val listUsers = mutableListOf<User>()
 //    MutableList<User> = objectMapper.readValue(File("Users.json").readText())
     val mapSalt = mutableMapOf<String, String>()
@@ -134,13 +122,57 @@ fun main() {
 
     val authFilter = AuthFilter(jwtTools, userLens, cookieLens,userStorage)
 
+    val url = "jdbc:mysql://localhost:3306/database"
+    val connect = DriverManager.getConnection(url, "root", "Nagano106")
 
     val appWithStaticResources = routes(
         static(ResourceLoader.Classpath("/zela/cobble/public")),
-        router(htmlView, userRegistration,userPasswordChecker),
+        router(htmlView, userRegistration,userPasswordChecker, connect),
     )
 
     val server =  ServerFilters.InitialiseRequestContext(contexts).then(authFilter).then(appWithStaticResources).asServer(Netty(9000)).start()
-
     println("Server started on http://localhost:" + server.port())
+
+
+//    val dropTableQuery = "DROP TABLE IF EXISTS Users"
+//    val createTableQuery = """
+//        CREATE TABLE Users (
+//            id MEDIUMINT NOT NULL AUTO_INCREMENT,
+//            nameLog CHAR(30) NOT NULL,
+//            password CHAR(60) NOT NULL,
+//            date DATETIME NOT NULL,
+//            role CHAR(30) NOT NULL,
+//            PRIMARY KEY (id)
+//        )
+//    """
+//
+//    connect.createStatement().use { stmt ->
+//        stmt.executeUpdate(dropTableQuery)
+//        stmt.executeUpdate(createTableQuery)
+//    }
+
+    println("you are connected")
+//    val hook = thread(start = false) {
+        val query = "SELECT nameLog, date FROM Users"
+        connect.createStatement().use { stmt ->
+            val resultSet = stmt.executeQuery(query)
+            while (resultSet.next()) {
+                val name = resultSet.getString("nameLog")
+                val date = resultSet.getTimestamp("date").toLocalDateTime()
+                println("Name: $name, Date: $date")
+            }
+        }
+//    }
+
+    Runtime.getRuntime().addShutdownHook(Thread {
+//        hook.start()
+        server.stop()
+        connect.close()
+    })
+
+    while (true) {
+        Thread.sleep(1000)
+    }
+
+
 }
