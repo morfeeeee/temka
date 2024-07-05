@@ -15,7 +15,7 @@ import zela.cobble.web.handlers.*
 import java.sql.Connection
 
 fun router(cashType: ContextAwareViewRender, userRegistr: UserRegistrationOperation, userPasswordChecker: PasswordCheckerOperation,
-connect: Connection): RoutingHttpHandler{
+): RoutingHttpHandler{
 
     return routes(
         "/" bind Method.GET to HomeHandler(cashType,),
@@ -27,7 +27,7 @@ connect: Connection): RoutingHttpHandler{
 //        "/users/{username}/delete" bind Method.GET to UserGetDeleteHandler(cashType, userStorage, ),
 //        "/users/{username}/edit" bind Method.POST to UserEditHandler(cashType, userStorage),
 //        "/users/{username}/edit" bind Method.GET to UserGetEditandler(cashType,userStorage),
-        "/users/add" bind Method.POST to UserAddHandler(cashType,userRegistr, connect),
+        "/users/add" bind Method.POST to UserAddHandler(cashType,userRegistr),
         "/users/add" bind Method.GET to UserGetAddHandler(cashType),
         "/services" bind Method.GET to ServicesHandler(cashType),
         "/contacts" bind Method.GET to ContactsHandler(cashType),
