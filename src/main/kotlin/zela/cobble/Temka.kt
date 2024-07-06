@@ -48,61 +48,16 @@ import zela.cobble.web.filters.AuthFilter
 import java.sql.DriverManager
 import kotlin.concurrent.thread
 
-val counter = JsonRpcCounter()
-val app: HttpHandler = routes(
-    "/ping" bind GET to {
-        Response(OK).body("pong")
-    },
 
-    "/formats/multipart" bind POST to { request ->
-        // to extract the contents, we first extract the form and then extract the fields from it using the lenses
-        // NOTE: we are "using" the form body here because we want to close the underlying file streams
-        strictFormBody(request).use {
-            println(nameField(it))
-            println(imageFile(it))
-        }
-    
-        Response(OK)
-    },
-
-    "/formats/json/jackson" bind GET to {
-        Response(OK).with(jacksonMessageLens of JacksonMessage("Barry", "Hello there!"))
-    },
-
-    "/templates/pebble" bind GET to {
-        val renderer = PebbleTemplates().CachingClasspath()
-        val view = Body.viewModel(renderer, TEXT_HTML).toLens()
-        val viewModel = PebbleViewModel()
-        Response(OK).with(view of viewModel)
-    },
-
-    "/testing/kotest" bind GET to {request ->
-        Response(OK).body("Echo '${request.bodyString()}'")
-    },
-
-    "/jsonrpc" bind POST to JsonRpc.auto(Jackson, JsonRpcCounterErrorHandler) {
-        method("increment", handler(counter::increment))
-        method("current", handler(counter::currentValue))
-    },
-
-    "/main" bind GET to {
-        val renderer = PebbleTemplates().CachingClasspath()
-        val view = Body.viewModel(renderer, TEXT_HTML).toLens()
-        val viewModel = PebbleViewModel()
-        Response(OK).with(view of viewModel)
-    }
-)
 
 fun main() {
 
     val listUsers = mutableListOf<User>()
-//    MutableList<User> = objectMapper.readValue(File("Users.json").readText())
     val mapSalt = mutableMapOf<String, String>()
-//            MutableMap<String, String> = objectMapper.readValue(File("Salt.json").readText())
 
     val url = "jdbc:mysql://localhost:3306/database"
     val connect = DriverManager.getConnection(url, "root", "Nagano106")
-    //    val hook = thread(start = false) {
+
     val query = "SELECT nameLog, date, password, role FROM Users"
     connect.createStatement().use { stmt ->
         val resultSet = stmt.executeQuery(query)
@@ -116,7 +71,7 @@ fun main() {
 
         }
     }
-//    }
+
 
     val querySalt = "SELECT username, salt FROM Salts"
     connect.createStatement().use { stmt ->
@@ -197,7 +152,6 @@ fun main() {
 
 
     Runtime.getRuntime().addShutdownHook(Thread {
-//        hook.start()
         server.stop()
         connect.close()
     })
