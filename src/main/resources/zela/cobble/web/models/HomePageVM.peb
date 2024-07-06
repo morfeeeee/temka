@@ -1,8 +1,93 @@
-{% extends "./partilas/Layout.peb" %}
+    {% extends "./partilas/Layout.peb" %}
     {% block content %}
-        <!-- Главный баннер -->
-<header class="jumbotron jumbotron-fluid text-white bg-dark">
-    <div class="container text-center">
+<style>
+    .jumbotron {
+        background: url('https://via.placeholder.com/1920x1080') no-repeat center center;
+        background-size: cover;
+        color: white;
+        padding: 4rem 0;
+    }
+    .jumbotron .display-4 {
+        font-weight: bold;
+    }
+    .bg-dark-blue {
+        background-color: #343a40;
+        color: white;
+    }
+    .bg-light-grey {
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+    .service-icon {
+        font-size: 3rem;
+        color: #007bff;
+    }
+    .portfolio-item {
+        transition: transform 0.3s;
+    }
+    .portfolio-item:hover {
+        transform: scale(1.05);
+    }
+    .contact-info {
+        font-size: 1.2rem;
+    }
+    .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    .tabs a {
+        padding: 1rem 2rem;
+        text-decoration: none;
+        color: #343a40;
+        background-color: #e9ecef;
+        border: 1px solid #dee2e6;
+        border-bottom: none;
+        margin-right: 1rem;
+    }
+    .tabs a.active {
+        background-color: #17a2b8;
+        color: white;
+    }
+    .pricing-table {
+        border: 1px solid #dee2e6;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    .pricing-table h4 {
+        background-color: #17a2b8;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+    }
+    .pricing-table ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .pricing-table ul li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .pricing-table .price {
+        font-size: 2rem;
+        text-align: center;
+        margin-top: 1rem;
+    }
+    .pricing-table .price span {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+    .pricing-table .btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+    }
+</style>
+
+<!-- Главный баннер -->
+<header class="jumbotron jumbotron-fluid text-white text-center">
+    <div class="container">
         <h1 class="display-4">Создание сайтов под ключ</h1>
         <p class="lead">Мы создаем профессиональные и эффективные сайты для вашего бизнеса</p>
         <a href="#contact" class="btn btn-primary btn-lg">Свяжитесь с нами</a>
@@ -11,7 +96,7 @@
 
 <!-- О нас -->
 <section class="container my-5">
-    <div class="row">
+    <div class="row align-items-center">
         <div class="col-md-6">
             <h2>О нас</h2>
             <p>Мы команда профессионалов с многолетним опытом в веб-разработке. Наши специалисты создадут для вас сайт любой сложности, будь то простой лендинг или масштабный интернет-магазин.</p>
@@ -23,24 +108,98 @@
 </section>
 
 <!-- Услуги -->
-<section id="services" class="bg-light py-5">
+<section id="services" class="bg-light-grey py-5">
     <div class="container">
-        <h2 class="text-center">Наши услуги</h2>
+        <h2 class="text-center mb-4">Наши услуги</h2>
         <div class="row text-center">
-            <div class="col-md-4">
-                <i class="fas fa-laptop-code fa-3x mb-3"></i>
-                <h4>Создание сайтов</h4>
-                <p>Полный цикл разработки сайтов под ключ от идеи до запуска.</p>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-address-card service-icon"></i>
+                <h4>Сайт визитка</h4>
+                <p>Простой и информативный сайт для вашего бизнеса.</p>
             </div>
-            <div class="col-md-4">
-                <i class="fas fa-bullhorn fa-3x mb-3"></i>
-                <h4>Разработка лендингов</h4>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-bullhorn service-icon"></i>
+                <h4>Landing page</h4>
                 <p>Эффективные лендинги для ваших маркетинговых кампаний.</p>
             </div>
-            <div class="col-md-4">
-                <i class="fas fa-shopping-cart fa-3x mb-3"></i>
-                <h4>Интернет-магазины</h4>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-building service-icon"></i>
+                <h4>Корпоративный сайт</h4>
+                <p>Решения для больших компаний и корпораций.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-shopping-cart service-icon"></i>
+                <h4>Интернет-магазин</h4>
                 <p>Создание удобных и функциональных интернет-магазинов.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-project-diagram service-icon"></i>
+                <h4>Индивидуальный проект, сервис</h4>
+                <p>Разработка уникальных решений для вашего бизнеса.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-edit service-icon"></i>
+                <h4>Редизайн и доработка сайтов</h4>
+                <p>Обновление и улучшение существующих сайтов.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Тарифы корпоративного сайта -->
+<section id="corporate-pricing" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Тарифы корпоративного сайта</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="pricing-table">
+                    <h4>Старт</h4>
+                    <ul>
+                        <li>Шаблонный дизайн сайта</li>
+                        <li>Упрощенный вариант логотипа</li>
+                        <li>Система управления сайтом</li>
+                        <li>Форма онлайн заказ</li>
+                        <li>Раздел наши работы / фотогалерея / видеогалерея</li>
+                        <li>Раздел отзывы</li>
+                        <li>Раздел услуги</li>
+                        <li>Домен ру на 1 год в подарок</li>
+                        <li>Регистрация в поисковых системах (Яндекс, Google)</li>
+                        <li>Загрузка файлов, изображений, видео на сайт</li>
+                        <li>Корпоративная почта</li>
+                    </ul>
+                    <div class="price">от 45 000 руб.<br><span>от 10 дней</span></div>
+                    <a href="#" class="btn btn-primary">Оставить заявку</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pricing-table">
+                    <h4>Стандарт</h4>
+                    <ul>
+                        <li>Все из <strong>Старт</strong> +</li>
+                        <li>Эксклюзивный профессиональный дизайн</li>
+                        <li>Профессиональная разработка логотипа (3 варианта)</li>
+                        <li>Адаптивная верстка сайт под все устройства</li>
+                        <li>Возможность вести блог на сайте</li>
+                        <li>Настройка рекламной кампании в Яндекс Директ</li>
+                    </ul>
+                    <div class="price">от 60 000 руб.<br><span>от 15 дней</span></div>
+                    <a href="#" class="btn btn-primary">Оставить заявку</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pricing-table">
+                    <h4>Премиум</h4>
+                    <ul>
+                        <li>Все из <strong>Стандарт</strong> +</li>
+                        <li>Профессиональная система управления сайтом (1С Битрикс, umi.cms, hostcms)</li>
+                        <li>Мультиязычность</li>
+                        <li>Оптимизация контента под продвижение</li>
+                        <li>Полная веб-аналитика (яндекс метрика, гугл аналитикс)</li>
+                        <li>Профессиональная настройка и запуск рекламных кампаний Яндекс Директ и Google Adwords</li>
+                    </ul>
+                    <div class="price">от 80 000 руб.<br><span>от 20 дней</span></div>
+                    <a href="#" class="btn btn-primary">Оставить заявку</a>
+                </div>
             </div>
         </div>
     </div>
@@ -48,36 +207,42 @@
 
 <!-- Портфолио -->
 <section id="portfolio" class="container my-5">
-    <h2 class="text-center">Наше портфолио</h2>
+    <h2 class="text-center mb-4">Наше портфолио</h2>
     <div class="row">
         <div class="col-md-4 mb-4">
-            <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 1">
-            <h5 class="mt-2">Проект 1</h5>
-            <p>Описание проекта 1.</p>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 1">
+                <h5 class="mt-2">Проект 1</h5>
+                <p>Описание проекта 1.</p>
+            </div>
         </div>
         <div class="col-md-4 mb-4">
-            <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 2">
-            <h5 class="mt-2">Проект 2</h5>
-            <p>Описание проекта 2.</p>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 2">
+                <h5 class="mt-2">Проект 2</h5>
+                <p>Описание проекта 2.</p>
+            </div>
         </div>
         <div class="col-md-4 mb-4">
-            <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 3">
-            <h5 class="mt-2">Проект 3</h5>
-            <p>Описание проекта 3.</p>
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 3">
+                <h5 class="mt-2">Проект 3</h5>
+                <p>Описание проекта 3.</p>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- Контакты -->
-<section id="contact" class="bg-light py-5">
+<section id="contact" class="bg-light-grey py-5">
     <div class="container">
-        <h2 class="text-center">Свяжитесь с нами</h2>
+        <h2 class="text-center mb-4">Свяжитесь с нами</h2>
         <div class="row">
             <div class="col-md-6 mb-4">
                 <h4>Наш адрес</h4>
-                <p>г. Москва, ул. Примерная, д. 1</p>
-                <p>Телефон: +7 123 456 78 90</p>
-                <p>Email: info@websolutions.com</p>
+                <p class="contact-info">г. Москва, ул. Примерная, д. 1</p>
+                <p class="contact-info">Телефон: +7 123 456 78 90</p>
+                <p class="contact-info">Email: info@websolutions.com</p>
             </div>
             <div class="col-md-6">
                 <h4>Напишите нам</h4>
@@ -100,5 +265,4 @@
         </div>
     </div>
 </section>
-    {% endblock %}
-
+{% endblock %}
