@@ -1,268 +1,383 @@
-    {% extends "./partilas/Layout.peb" %}
-    {% block content %}
-<style>
-    .jumbotron {
-        background: url('https://via.placeholder.com/1920x1080') no-repeat center center;
-        background-size: cover;
-        color: white;
-        padding: 4rem 0;
-    }
-    .jumbotron .display-4 {
-        font-weight: bold;
-    }
-    .bg-dark-blue {
-        background-color: #343a40;
-        color: white;
-    }
-    .bg-light-grey {
-        background-color: #f8f9fa;
-        color: #343a40;
-    }
-    .service-icon {
-        font-size: 3rem;
-        color: #007bff;
-    }
-    .portfolio-item {
-        transition: transform 0.3s;
-    }
-    .portfolio-item:hover {
-        transform: scale(1.05);
-    }
-    .contact-info {
-        font-size: 1.2rem;
-    }
-    .tabs {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 2rem;
-    }
-    .tabs a {
-        padding: 1rem 2rem;
-        text-decoration: none;
-        color: #343a40;
-        background-color: #e9ecef;
-        border: 1px solid #dee2e6;
-        border-bottom: none;
-        margin-right: 1rem;
-    }
-    .tabs a.active {
-        background-color: #17a2b8;
-        color: white;
-    }
-    .pricing-table {
-        border: 1px solid #dee2e6;
-        padding: 2rem;
-        margin-bottom: 2rem;
-    }
-    .pricing-table h4 {
-        background-color: #17a2b8;
-        color: white;
-        padding: 1rem;
-        text-align: center;
-    }
-    .pricing-table ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    .pricing-table ul li {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #dee2e6;
-    }
-    .pricing-table .price {
-        font-size: 2rem;
-        text-align: center;
-        margin-top: 1rem;
-    }
-    .pricing-table .price span {
-        font-size: 1rem;
-        color: #6c757d;
-    }
-    .pricing-table .btn {
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin-top: 1rem;
-    }
-</style>
-
+{% extends "./partilas/Layout.peb" %}
+{%block content %}
 <!-- Главный баннер -->
-<header class="jumbotron jumbotron-fluid text-white text-center">
-    <div class="container">
-        <h1 class="display-4">Создание сайтов под ключ</h1>
-        <p class="lead">Мы создаем профессиональные и эффективные сайты для вашего бизнеса</p>
-        <a href="#contact" class="btn btn-primary btn-lg">Свяжитесь с нами</a>
-    </div>
-</header>
+		<section class="hero-section">
+			<div class="container">
+				<header class="header">
+					<h1>FLORBAZAR</h1>
+					<p>ЦВЕТОЧНЫЕ МАГАЗИНЫ <br />В ЯРОСЛАВЛЕ</p>
+					<p class="address">
+						<i class="fas fa-map-marker-alt"></i> ул. Свободы, 41, Ярославль
+					</p>
+					<button type="button" class="btn btn-outline-danger">
+						Выбрать букет
+					</button>
+				</header>
+			</div>
+		</section>
 
-<!-- О нас -->
-<section class="container my-5">
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2>О нас</h2>
-            <p>Мы команда профессионалов с многолетним опытом в веб-разработке. Наши специалисты создадут для вас сайт любой сложности, будь то простой лендинг или масштабный интернет-магазин.</p>
-        </div>
-        <div class="col-md-6">
-            <img src="https://via.placeholder.com/500" class="img-fluid" alt="О нас">
-        </div>
-    </div>
+		<!-- Продукты -->
+		<section class="products">
+			<div class="container">
+				<div class="row">
+				<div class="col-12"><h2 class="tittle">ВИТРИНА БУКЕТОВ</h2></div>
+					<!-- Кнопка для открытия модального окна -->
+					<div class="col-8"></div>
+					<div class="col-4">
+					<div class="button-open text-right">
+						<a
+						href="#"
+						class="catalog__order"
+						role="button"
+						data-bs-toggle="modal"
+						data-bs-target="#flowerOrderModal"
+					>
+						ИНДИВИДУАЛЬНЫЙ ЗАКАЗ БУКЕТОВ
+					</a>
+					</div>
+				</div>
+
+				<!-- Модальное окно -->
+				<div
+					class="modal fade"
+					id="flowerOrderModal"
+					tabindex="-1"
+					aria-labelledby="exampleModalLabel"
+					aria-hidden="true"
+				>
+					<div class="modal-dialog modal-dialog-centered">
+						<!-- <button
+									type="button"
+									class="btn-close close"
+									data-bs-dismiss="modal"
+									aria-label="Close"
+								>
+									&times;
+								</button> -->
+
+						<div class="modal-content">
+							<div class="modal-header">
+								<img
+									src="img/buket.jpg"
+									alt="Цветы"
+									class="img-fluid"
+								/>
+							</div>
+							<div class="modal-body">
+
+								<h2 class="text-center">ИНДИВИДУАЛЬНЫЙ ЗАКАЗ</h2>
+								<p class="text-center">
+									Оставьте свои контакты, наши флористы с удовольствием составят
+									для Вас букет, соответствующий всем Вашим пожеланиям
+								</p>
+								<form>
+									<div class="form-floating mb-3">
+										<input
+											type="text"
+											class="form-control"
+											id="floatingName"
+											placeholder="Ваше имя"
+										/>
+										<label for="floatingName">Ваше имя</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input
+											type="tel"
+											class="form-control"
+											id="floatingPhone"
+											placeholder="+7 (999) 999-99-99"
+										/>
+										<label for="floatingPhone">+7 (999) 999-99-99</label>
+									</div>
+									<div class="row">
+									<div class="col-3"></div>
+									<div class="col-8"><a href="#" class="btn btn-outline-primary">Отправить</a></div>
+								</div>
+
+
+								</form>
+								<div class="privacy-text">
+									Нажимая на кнопку, Вы соглашаетесь с
+									<a href="#">политикой конфиденциальности</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				<p class="parag">Выбрать букет в наличии</p>
+				<div class="filter">
+					<a href="#"
+						>Cначала дешевле<i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row g-4">
+					<!-- <div class="tovary"> -->
+					<!-- Продукт 1 -->
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="card product-card">
+							<img
+								src="img/roza.jpg"
+								class="card-img-top"
+								alt="Продукт 1"
+							/>
+							<div class="card-body product-info">
+								<h5 class="product-title">Роза красная</h5>
+								<p class="product-price">500 руб.</p>
+								<a href="#" class="btn btn-outline-primary">Купить</a>
+							</div>
+						</div>
+					</div>
+					<!-- Продукт 2 -->
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="card product-card">
+							<img
+								src="img/orhi.jpg"
+								class="card-img-top"
+								alt="Продукт 2"
+							/>
+							<div class="card-body product-info">
+								<h5 class="product-title">Орхидея белая</h5>
+								<p class="product-price">750 руб.</p>
+								<a href="#" class="btn btn-outline-primary">Купить</a>
+							</div>
+						</div>
+					</div>
+					<!-- Продукт 3 -->
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="card product-card">
+							<img
+								src="img/lilia.jpg"
+								class="card-img-top"
+								alt="Продукт 3"
+							/>
+							<div class="card-body product-info">
+								<h5 class="product-title">Букет лилий</h5>
+								<p class="product-price">1200 руб.</p>
+								<a href="#" class="btn btn-outline-primary">Купить</a>
+							</div>
+						</div>
+					</div>
+					<!-- Продукт 4 -->
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="card product-card">
+							<img
+								src="img/tulpan.jpg"
+								class="card-img-top"
+								alt="Продукт 4"
+							/>
+							<div class="card-body product-info">
+								<h5 class="product-title">Тюльпаны разноцветные</h5>
+								<p class="product-price">600 руб.</p>
+								<a href="#" class="btn btn-outline-primary">Купить</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			<!-- </div> -->
+		</div>
+		</section>
+
+		<!-- Информация о нас -->
+		<section class="about-us bg-light py-5">
+			<div class="container">
+				<div class="about-us">
+				<h2 class="text-center mb-4">О нас</h2>
+				<p class="text-center mb-4">
+					Мы - компания Florbazar, которая предоставляет широкий выбор цветов и
+					букетов для любых праздников. Наша команда работает для того, чтобы вы
+					всегда могли дарить радость своим близким.
+				</p>
+			</div>
+			<div class="preimus">
+				<h2 class="text-center mb-4">Преимущества</h2>
+			</div>
+				<div class="advantages">
+
+					<div class="row">
+						<div class="col-3">
+					<div class="advantage-item">
+						<img src="img/car.jpg" alt="Advantage 1" />
+
+						<h5>Доставка в течение часа</h5>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="advantage-item">
+						<img src="img/car.jpg" alt="Advantage 2" />
+
+						<h5>9+ лет на рынке</h5>
+					</div>
+				</div>
+					<div class="col-3">
+					<div class="advantage-item">
+						<img src="img/car.jpg" alt="Advantage 3" />
+
+						<h5>Ежедневно 20-50 свежих букетов на нашей онлайн-витрине</h5>
+					</div>
+				</div>
+					<div class="col-3">
+					<div class="advantage-item">
+						<img src="img/car.jpg" alt="Advantage 4" />
+
+						<h5>70+ видов цветов</h5>
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+		</section>
+		<section class="otzivy">
+			<div class="container">
+				<div class="otzyvy-lol">
+					<div class="row">
+						<div class="col-1"></div>
+						<div class="col-5">
+							<h2>МЫ ЦЕНИМ ВАШЕ МНЕНИЕ</h2>
+
+							<p class="p1">Оставьте свой отзыв о нашей цветочной студии</p>
+
+							<!-- Блок для рейтинга звезд -->
+							<div class="rating" id="starRating">
+								<span class="star" data-value="1">&#9733;</span>
+								<span class="star" data-value="2">&#9733;</span>
+								<span class="star" data-value="3">&#9733;</span>
+								<span class="star" data-value="4">&#9733;</span>
+								<span class="star" data-value="5">&#9733;</span>
+							</div>
+
+							<p class="p2">Оценивая нашу работу, Вы помогаете FlorBazar развиваться и становиться лучше 🌷</p>
+						</div>
+						<div class="col-1"></div>
+						<div class="col-4">
+							<!-- Изображение, которое занимает всю колонку -->
+							<img src="img/palma.jpg" alt="Palma" class="img-responsive">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+				// Плавные переходы при нажатии на ссылки навигации
+				document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+					anchor.addEventListener('click', function (e) {
+						e.preventDefault()
+						document.querySelector(this.getAttribute('href')).scrollIntoView({
+							behavior: 'smooth',
+						})
+					})
+				})
+
+				// Появление элементов при прокрутке (Intersection Observer)
+				const observer = new IntersectionObserver(entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('fade-in')
+						}
+					})
+				})
+
+				document.querySelectorAll('.bouquet-item').forEach(item => {
+					observer.observe(item)
+				})
+
+				// Скрытие навигации при прокрутке вниз
+				let lastScrollTop = 0
+				window.addEventListener(
+					'scroll',
+					function () {
+						const st = window.pageYOffset || document.documentElement.scrollTop
+						if (st > lastScrollTop) {
+							document.querySelector('.navbar').classList.add('hide')
+						} else {
+							document.querySelector('.navbar').classList.remove('hide')
+						}
+						lastScrollTop = st <= 0 ? 0 : st
+					},
+					false
+				)
+			})
+        // Получаем все звезды
+        const stars = document.querySelectorAll('.star');
+
+        // Функция для выделения звезд до текущей
+        function highlightStars(starIndex) {
+            stars.forEach((star, index) => {
+                if (index <= starIndex) {
+                    star.classList.add('hovered');
+                } else {
+                    star.classList.remove('hovered');
+                }
+            });
+        }
+
+        // Убираем выделение всех звезд
+        function resetStars() {
+            stars.forEach(star => {
+                star.classList.remove('hovered');
+            });
+        }
+
+        // Обрабатываем событие наведения мыши
+        stars.forEach((star, index) => {
+            star.addEventListener('mouseover', () => {
+                highlightStars(index);
+            });
+
+            star.addEventListener('mouseout', () => {
+                resetStars();
+            });
+
+            // Обрабатываем клик по звезде
+            star.addEventListener('click', () => {
+                window.location.href = 'https://yandex.ru/maps/'; // Переход на Яндекс Карты при клике
+            });
+        });
+    </script>
+
+
+
 </section>
 
-<!-- Услуги -->
-<section id="services" class="bg-light-grey py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Наши услуги</h2>
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <i class="fas fa-address-card service-icon"></i>
-                <h4>Сайт визитка</h4>
-                <p>Простой и информативный сайт для вашего бизнеса.</p>
-            </div>
-            <div class="col-md-4 mb-4">
-                <i class="fas fa-bullhorn service-icon"></i>
-                <h4>Landing page</h4>
-                <p>Эффективные лендинги для ваших маркетинговых кампаний.</p>
-            </div>
-            <div class="col-md-4 mb-4">
-                <i class="fas fa-building service-icon"></i>
-                <h4>Корпоративный сайт</h4>
-                <p>Решения для больших компаний и корпораций.</p>
-            </div>
-            <div class="col-md-4 mb-4">
-                <i class="fas fa-shopping-cart service-icon"></i>
-                <h4>Интернет-магазин</h4>
-                <p>Создание удобных и функциональных интернет-магазинов.</p>
-            </div>
-            <div class="col-md-4 mb-4">
-                <i class="fas fa-project-diagram service-icon"></i>
-                <h4>Индивидуальный проект, сервис</h4>
-                <p>Разработка уникальных решений для вашего бизнеса.</p>
-            </div>
-            <div class="col-md-4 mb-4">
-                <i class="fas fa-edit service-icon"></i>
-                <h4>Редизайн и доработка сайтов</h4>
-                <p>Обновление и улучшение существующих сайтов.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Тарифы корпоративного сайта -->
-<section id="corporate-pricing" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Тарифы корпоративного сайта</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="pricing-table">
-                    <h4>Старт</h4>
-                    <ul>
-                        <li>Шаблонный дизайн сайта</li>
-                        <li>Упрощенный вариант логотипа</li>
-                        <li>Система управления сайтом</li>
-                        <li>Форма онлайн заказ</li>
-                        <li>Раздел наши работы / фотогалерея / видеогалерея</li>
-                        <li>Раздел отзывы</li>
-                        <li>Раздел услуги</li>
-                        <li>Домен ру на 1 год в подарок</li>
-                        <li>Регистрация в поисковых системах (Яндекс, Google)</li>
-                        <li>Загрузка файлов, изображений, видео на сайт</li>
-                        <li>Корпоративная почта</li>
-                    </ul>
-                    <div class="price">от 45 000 руб.<br><span>от 10 дней</span></div>
-                    <a href="#" class="btn btn-primary">Оставить заявку</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="pricing-table">
-                    <h4>Стандарт</h4>
-                    <ul>
-                        <li>Все из <strong>Старт</strong> +</li>
-                        <li>Эксклюзивный профессиональный дизайн</li>
-                        <li>Профессиональная разработка логотипа (3 варианта)</li>
-                        <li>Адаптивная верстка сайт под все устройства</li>
-                        <li>Возможность вести блог на сайте</li>
-                        <li>Настройка рекламной кампании в Яндекс Директ</li>
-                    </ul>
-                    <div class="price">от 60 000 руб.<br><span>от 15 дней</span></div>
-                    <a href="#" class="btn btn-primary">Оставить заявку</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="pricing-table">
-                    <h4>Премиум</h4>
-                    <ul>
-                        <li>Все из <strong>Стандарт</strong> +</li>
-                        <li>Профессиональная система управления сайтом (1С Битрикс, umi.cms, hostcms)</li>
-                        <li>Мультиязычность</li>
-                        <li>Оптимизация контента под продвижение</li>
-                        <li>Полная веб-аналитика (яндекс метрика, гугл аналитикс)</li>
-                        <li>Профессиональная настройка и запуск рекламных кампаний Яндекс Директ и Google Adwords</li>
-                    </ul>
-                    <div class="price">от 80 000 руб.<br><span>от 20 дней</span></div>
-                    <a href="#" class="btn btn-primary">Оставить заявку</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+		<!-- Контакты -->
+		<section class="contacts py-5">
+			<div class="container">
+				<h2 class="contacts text-center">Контакты</h2>
+			<div class="row">
 
-<!-- Портфолио -->
-<section id="portfolio" class="container my-5">
-    <h2 class="text-center mb-4">Наше портфолио</h2>
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="portfolio-item">
-                <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 1">
-                <h5 class="mt-2">Проект 1</h5>
-                <p>Описание проекта 1.</p>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="portfolio-item">
-                <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 2">
-                <h5 class="mt-2">Проект 2</h5>
-                <p>Описание проекта 2.</p>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="portfolio-item">
-                <img src="https://via.placeholder.com/350" class="img-fluid" alt="Проект 3">
-                <h5 class="mt-2">Проект 3</h5>
-                <p>Описание проекта 3.</p>
-            </div>
-        </div>
-    </div>
-</section>
+				<div class="col-8">
+			<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad7b4e2df97436d5e7969f52f66e9256d8d60a111fb048a67ff4569c04f276376&amp;width=823&amp;height=437&amp;lang=ru_RU&amp;scroll=true"></script>
+		</div>
+		<div class="col-4">
+			<div class="contact-card">
+				<h3>FLORBAZAR</h3>
+				<p><strong>Время работы:</strong></p>
+				<ul>
+					<li>8:00-20:00 (Свободы, 41)</li>
+					<li>9:00-21:00 (пр. Фрунзе, 525)</li>
+				</ul>
 
-<!-- Контакты -->
-<section id="contact" class="bg-light-grey py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Свяжитесь с нами</h2>
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <h4>Наш адрес</h4>
-                <p class="contact-info">г. Москва, ул. Примерная, д. 1</p>
-                <p class="contact-info">Телефон: +7 123 456 78 90</p>
-                <p class="contact-info">Email: info@websolutions.com</p>
-            </div>
-            <div class="col-md-6">
-                <h4>Напишите нам</h4>
-                <form>
-                    <div class="form-group">
-                        <label for="name">Имя</label>
-                        <input type="text" class="form-control" id="name" placeholder="Ваше имя">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Ваш Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Сообщение</label>
-                        <textarea class="form-control" id="message" rows="3" placeholder="Ваше сообщение"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+				<p><strong>WhatsApp/ Viber/ Telegram:</strong></p>
+				<ul>
+					<li>+7 (965) 726-24-11</li>
+				</ul>
+
+				<p><strong>Телефон:</strong></p>
+				<ul>
+					<li>+7 (4852) 66-24-11</li>
+				</ul>
+
+				<p><strong>Адреса:</strong></p>
+				<ul>
+					<li>ул. Свободы 41 | +7 (4852) 66-24-1</li>
+					<li>пр. Фрунзе, 525 | +7 (905) 634 55-84</li>
+				</ul>
+			</div>
+		</div>
+		</div>
+	</div>
+		</section>
 {% endblock %}

@@ -1,66 +1,613 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}
-    </title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-</head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Florbazar - Главная</title>
+		<!-- Подключение Bootstrap -->
+		<link href="/css/bootstrap.min.css" rel="stylesheet" />
+		<link
+			href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- Встроенные стили -->
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+			}
+			.img{
+			 object-fit: cover;
+			}
+			.navbar {
+				background-color: #0d3d36;
+
+				color: #e6e3e3;
+				font-family: 'Comfortaa', Arial, sans-serif;
+			}
+			.navbar-nav a {
+				color: #e6e3e3;
+				font-family: 'Comfortaa', Arial, sans-serif;
+			}
+			.social-icons a {
+				color: #e6e3e3;
+			}
+			.navbar-toggler {
+				background-color: #f8f9fa;
+				color: #e6e3e3;
+			}
+
+			.city {
+				margin-right: 10px;
+			}
+			.social-icons a {
+				justify-content: space-between;
+				padding-left: 15px;
+				font-size: 15px;
+			}
+			.navbar-brand a {
+				max-height: 50px;
+				font-family: 'Cormorant Garamond', Arial, sans-serif;
+				color: #e6e3e3;
+				font-size: 29px;
+				padding-bottom: 20px;
+			}
+			.navbar-nav {
+				margin-right: 100px;
+			}
+			.hero-section {
+				text-align: center;
+				padding: 50px 20px;
+				background-image: url('https://optim.tildacdn.com/tild3136-6234-4030-a339-303863613063/-/format/webp/_.jpg');
+				background-size: cover;
+				background-position: center;
+				position: relative;
+				height: 900px;
+				line-height: 1.2;
+			}
+			.hero-section img {
+				max-width: 100%;
+			}
+			.hero-section h1 {
+				font-size: 3rem;
+				font-weight: bold;
+			}
+			.hero-section p {
+				font-size: 1.5rem;
+			}
+			.parag {
+				font-size: 20px;
+				font-family: 'Comfortaa', Arial, sans-serif;
+				margin-left: 4px;
+				margin-bottom: 35px;
+			}
+			.tittle {
+				margin-top: 20px;
+				/* margin-bottom: 25px; */
+				font-family: 'Cormorant Garamond', Arial, sans-serif;
+				color: #11574c;
+				font-size: 44px;
+				font-weight: 600;
+				margin-right: 100px;
+			}
+			.products {
+				padding: 50px 0;
+			}
+			.product-card {
+				border: 1px solid #e0e0e0;
+				transition: box-shadow 0.3s ease;
+			}
+			.product-card:hover {
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+			}
+			.product-card img {
+				max-height: 200px;
+				object-fit: cover;
+			}
+			.product-info {
+				padding: 15px;
+			}
+			.product-title {
+				font-size: 1.25rem;
+				font-weight: bold;
+			}
+			.product-price {
+				color: #d9534f;
+				font-size: 1.2rem;
+			}
+			.footer {
+				background-color: #343a40;
+				color: white;
+				padding: 20px 0;
+				text-align: center;
+			}
+			.footer a {
+				color: #f8f9fa;
+				text-decoration: none;
+				margin: 0 10px;
+			}
+			.footer a:hover {
+				text-decoration: underline;
+			}
+			.header {
+				font-family: 'Comfortaa', Arial, sans-serif;
+				text-align: center;
+				padding: 50px 20px;
+
+				background-size: cover;
+				background-position: center;
+				position: relative;
+				height: 900px;
+				line-height: 1.2;
+			}
+
+			.header h1 {
+				font-weight: 100;
+				font-size: 32px;
+				margin: 230px 0 30px 0;
+				color: #fff;
+			}
+
+			.header p {
+				font-size: 48px;
+				margin: 10px 0;
+				color: #f8f9fa;
+			}
+
+			.header .address {
+				font-size: 16px;
+			}
+
+			.btn {
+				margin: 30px 0 0 0;
+				width: 200px;
+				color: pink;
+				border: 1px solid pink;
+				font-size: 18px;
+			}
+			.btn:hover {
+				background-color: pink;
+				border: 1px solid white;
+			}
+			.btn.btn-outline-primary{
+                 font-size: 25px;
+				 position: sticky top;
+				 font-weight: 400;
+				 color: palevioletred;
+				 border: 1px solid palevioletred;
+				 font-family: 'Cormorant Garamond', Arial, sans-serif;
+
+
+			}
+			.filter{
+				margin-top: 50px;
+			}
+			.filter a {
+				font-family: 'Comfortaa', Arial, sans-serif;
+				font-size: 20px;
+				margin-bottom: 100px;
+				margin-top: 150px;
+				margin-right: 950px;
+				font-weight: 300;
+				margin-left: 3px;
+				white-space: nowrap;
+				text-decoration: none;
+				color: black;
+
+			}
+			.button-open a{
+				font-family: 'Comfortaa', Arial, sans-serif;
+				color: rgb(218, 105, 125);
+				font-size: 19px;
+				font-weight: 2000;
+			}
+			/* .tovary{
+				font-family: 'Comfortaa', Arial, sans-serif;
+			} */
+			 .card-body.product-info{
+				font-family: 'Comfortaa', Arial, sans-serif;
+			 }
+			 .product-title{
+				font-weight: 100;
+
+			 }
+			 .product-price{
+				color:#0c3c35;
+				font-weight: 300;
+				font-size: 20px;
+			 }
+			 .modal-content{
+				width: 800px;
+				height: 1000px;
+			 }
+			 .modal-header{
+				padding-top: 0;
+				padding-left: 0;
+				padding-right: 0;
+				padding-bottom: 0;
+				width: 550px;
+			 }
+			 .modal-body h2{
+				font-family: 'Cormorant Garamond', Arial, sans-serif;
+				color:#0c3c35;
+				font-weight: 600;
+				font-size: 46px;
+			 }
+			 .modal-body p{
+				font-family: 'Comfortaa', Arial, sans-serif;
+				font-size: 18px;
+			 }
+			 .form-floating.mb-3{
+				font-family: 'Comfortaa', Arial, sans-serif;
+				font-size: 18px;
+				color: #959494;
+			 }
+			 .btn-form{
+				font-family: 'Comfortaa', Arial, sans-serif;
+				color: rgb(218, 105, 125);
+				font-size: 30px;
+				font-weight: 400;
+				border-color: rgb(218, 105, 125);
+			 }
+			 .privacy-text{
+                text-align: center;
+				font-family: 'Comfortaa', Arial, sans-serif;
+				font-size: 15px;
+				margin-top: 40px;
+			 }
+			 .col-8{
+				padding-left: 25px;
+			 }
+			 .about-us h2{
+				font-family: 'Cormorant Garamond', Arial, sans-serif;
+				color: #11574c;
+				font-size: 39px;
+				font-weight: 600;
+			 }
+			 .about-us p{
+				font-family: 'Comfortaa', Arial, sans-serif;
+				font-size: 18px;
+			 }
+			 .about-us{
+				margin-bottom: 100px;
+			 }
+			 .advantages h2{
+				font-family: 'Cormorant Garamond', Arial, sans-serif;
+				color: #11574c;
+				font-size: 39px;
+				font-weight: 600;
+			 }
+			 .advantages h5{
+				font-family: 'Comfortaa', Arial, sans-serif;
+				font-size: 18px;
+			 }
+			 .advantages {
+                    padding-left: 45px;
+
+                }
+
+                .advantage-item img{
+                    width: 100%;
+                    margin-bottom: 10px;
+					object-fit: cover;
+                }
+				.advantage-item h5{
+                    color: #074b40;
+					font-size: 18px;
+					font-family: 'Comfortaa', Arial, sans-serif;
+
+                }
+			.preimus h2{
+				font-family: 'Cormorant Garamond', Arial, sans-serif;
+				color: #11574c;
+				font-size: 45px;
+				font-weight: 600;
+			}
+			.rating {
+            display: inline-block;
+            font-size: 3rem;
+        }
+
+        .star {
+            cursor: pointer;
+            color: lightgray;
+            transition: color 0.3s;
+        }
+
+        .star:hover,
+        .star.hovered,
+        .star.active {
+            color: yellow;
+        }
+		.otzyvy-lol h2{
+				/* margin-bottom: 25px; */
+				font-family: 'Cormorant Garamond', Arial, sans-serif;
+				color: #11574c;
+				font-size: 39px;
+				font-weight: 600;
+		}
+		.otzyvy-lol img {
+    width: 100%; /* Картинка займет 100% ширины блока /
+    height: auto; / Высота подстраивается автоматически для сохранения пропорций /
+    object-fit: cover; / Изображение будет обрезано, чтобы полностью заполнить блок /
+    max-width: 100%; / Предотвращает выход картинки за пределы блока */
+    display: block;
+    }
+	.p1{
+		font-family: 'Comfortaa', Arial, sans-serif;
+				font-size: 17px;
+		margin-top: 20px;
+	}
+	.p2{
+		margin-top: 20px;
+		font-family: 'Comfortaa', Arial, sans-serif;
+				font-size: 13px;
+		color:#626262
+	}
+	.footer {
+                background-color: #0d3d36;
+                color: #e6e3e3;
+                padding: 40px 20px;
+                text-align: center;
+                position: relative;
+            }
+
+            .footer-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                max-width: 1200px;
+                margin: 0 auto;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .footer-left {
+                text-align: left;
+                flex-basis: 30%;
+            }
+
+            .footer-middle {
+                text-align: center;
+                flex-basis: 30%;
+            }
+
+            .footer-right {
+                text-align: right;
+                flex-basis: 30%;
+            }
+
+            .footer-left h3 {
+                font-family: 'Prata', serif;
+                font-size: 24px;
+                margin-bottom: 15px;
+                margin-left: 40px; /* Подвинуть название левее */
+            }
+			.social-icons a{
+				font-size: 1.2rem;
+			}
+
+            .footer-middle ul,
+            .footer-right ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .footer-middle li,
+            .footer-right li {
+                margin-bottom: 10px;
+            }
+
+            .footer-middle a,
+            .footer-right a {
+                color: #e6e3e3;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+            .footer-middle a:hover,
+            .footer-right a:hover {
+                color: #ddd;
+            }
+
+            .footer-right i {
+                margin-right: 10px;
+            }
+
+            .footer-bottom {
+                margin-top: 40px;
+                border-top: 1px solid #fff;
+                padding-top: 20px;
+                font-size: 14px;
+            }
+			.footer-content{
+				font-family: 'Comfortaa', Arial, sans-serif;
+			}
+
+
+			.contact-card {
+    background-color: #0d3d36;
+    color: white;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+	box-shadow: 18px 11px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.contact-card h3 {
+	font-family: 'Cormorant Garamond', Arial, sans-serif;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #e6e3e3;
+}
+
+.contact-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-card li {
+    margin-bottom: 10px;
+	font-family: 'Comfortaa', Arial, sans-serif;
+	color: #e6e3e3;
+}
+
+.contact-card strong {
+    margin-top: 18px;
+    font-weight: 100;
+	font-family: 'Comfortaa', Arial, sans-serif;
+	color: #bcb5b5;
+}
+
+.contact-card strong {
+    font-size: 16px;
+}
+
+.contact-card ul li {
+    font-size: 16px;
+}
+.contacts h2{
+	font-family: 'Cormorant Garamond', Arial, sans-serif;
+				color: #11574c;
+				font-size: 39px;
+				font-weight: 600;
+}
+
+
+
+		</style>
+		</header>
 <body>
 
 <!-- Навигационная панель -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">WebSolutions</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Главная</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/services">Услуги</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#portfolio">Портфолио</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/contacts">Контакты и отзывы</a>
-            </li>
-            {% if user is empty %}
-                <li class="nav-item">
-                    <a class="nav-link btn btn-link" href="/login">Вход</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-link" href="/users/add">Регистрация</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">
-                        <i class="fas fa-user"></i> {{ user.nameLog }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-link text-danger" href="/logout">Выход</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
-</nav>
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container">
+				<div class="navbar-brand">
+					<a href="#" class="nav-link">Florbazar</a>
+				</div>
+
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li><a href="#showcase" class="nav-link">Витрина букетов</a></li>
+						<li><a href="#about" class="nav-link">О компании</a></li>
+						<li><a href="#contact" class="nav-link">Контакты</a></li>
+						<li><a href="#bonuses" class="nav-link">Бонусная программа</a></li>
+						<li>
+							<a href="#collection" class="nav-link">Коллекция букетов</a>
+						</li>
+                            {% if user is empty %}
+                            <li>
+                            <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Вход в систему
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                              <li class="nav-item">
+                        <a class="dropdown-item" href="/login">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="dropdown-item" href="/users/add">Регистрация</a>
+                    </li>
+                            </ul>
+                          </div>
+                            </li>
+
+
+                {% else %}
+                    <li>
+                            <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fas fa-user"></i> {{ user.nameLog }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                              <li class="nav-item">
+                        <a class="dropdown-item" href="/logout">Выход</a>
+                    </li>
+                            </ul>
+                          </div>
+                            </li>
+
+                {% endif %}
+					</ul>
+					<div class="contact-info">
+						<span class="city">г. Ярославль </span>
+						<span>+7 (4852) 66-24-11</span>
+						<div class="social-icons">
+							<a href="#"><i class="fa fa-paper-plane"></i></a>
+							<a href="#"><i class="fab fa-whatsapp"></i></a>
+							<a href="#"><i class="fab fa-vk"></i></a>
+							<a href="#"><i class="fab fa-instagram"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
 {% block content %}
 {% endblock %}
 
-<!-- Подвал -->
-<footer class="bg-dark text-white text-center py-3">
-    <p>&copy; 2024 WebSolutions. Все права защищены.</p>
-</footer>
+	<!-- Футер -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>FLORBAZAR</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa fa-paper-plane"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-middle">
+                    <ul>
+						<li><a href="#bonuses">Бонусная программа</a></li>
+						<li><a href="#collection">Коллекция букетов</a></li>
+                        <li><a href="#showcase">Витрина букетов</a></li>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-</body>
+                        <li><a href="#about">О компании</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+
+
+                    </ul>
+                </div>
+                <div class="footer-right">
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i> г. Ярославль, ул. Свободы,
+                            41
+                        </li>
+                        <li><i class="fas fa-phone"></i> +7 (4852) 66-24-11</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">&copy; FLORBAZAR, 2024</div>
+        </footer>
+
+		<!-- Подключение Bootstrap JS -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+		<script src="/js/bootstrap.bundle.min.js"></script>
+	</body>
 </html>
